@@ -4,13 +4,14 @@ use axum::{
     Form, extract::State, routing::post
 };
 use leptos::{ssr::render_to_string as render, *};
+use rusqlite::Connection;
 use std::sync::{Arc, Mutex};
 use serde::Deserialize;
 
-type DeviceState = Arc<Mutex<Vec<DeviceAddForm>>>;
 
-pub fn device_router() -> Router {
-    let device_state: DeviceState = Arc::new(Mutex::new(vec![]));
+type SqliteConn = Arc<Mutex<Connection>>;
+
+pub fn device_router() -> Router<SqliteConn> {
     Router::new()
         .route("/add", post(post_device_add))
         .with_state(device_state)
