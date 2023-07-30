@@ -10,7 +10,5 @@ if [ ! -f assets/hyperscript.min.js ]; then
     wget https://unpkg.com/hyperscript.org@0.9.9/dist/_hyperscript.min.js -O assets/hyperscript.min.js
 fi
 
-cp -rf assets/ target/assets/
-
 RUST_LOG=info cargo run
 
